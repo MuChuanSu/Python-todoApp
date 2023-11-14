@@ -1,6 +1,4 @@
-from functions import show
-
-
+from functions import show, getTodos
 
 todoList = []
 
@@ -12,15 +10,16 @@ while True:
 
             task_toAdd = input("add a task: ") + '\n'
 
-            with open('Todos.txt', 'r') as file:
-                todoList = file.readlines()
+            todoList = getTodos()
             todoList.append(task_toAdd)
             with open('Todos.txt', 'w') as file:
                 file.writelines(todoList)
         case 'show':
-            show()
+            todoList = getTodos()
+            show(todoList)
         case 'edit':
-            todoList = show()
+            show(todoList)
+            todoList = getTodos()
             indexToEdit = int(input("type the index number for task to edit: "))
             newTask = input("Please enter new task to replace it: ")
             todoList[indexToEdit - 1] = newTask
@@ -28,13 +27,15 @@ while True:
                 file.writelines(todoList)
 
         case 'complete':
-            todoList = show()
+            show(todoList)
+            todoList = getTodos()
             completedTaskIndex = int(input("type the index number for task to complete: "))
             todoList.pop(completedTaskIndex - 1)
             with open('Todos.txt','w') as file:
                 file.writelines(todoList)
         case 'clear':
-            todoList = show()
+            show(todoList)
+            todoList = getTodos()
             toClear = input("Are you sure you want to clear all the tasks? enter Y in upper case :")
             if toClear == "Y":
                 todoList =[]
