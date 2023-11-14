@@ -5,7 +5,7 @@ import functions
 todos = functions.getTodos()
 def add_todo():
     todo = st.session_state["new_todo"]
-    '''This line gets the user input with the key "new_todo"'''
+    '''This line gets the user input with the key "new_todo"' ''
     todos.append(todo+'\n')
     functions.writeTodos(todos)
 
